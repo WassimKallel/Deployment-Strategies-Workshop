@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ms-a
+    version: v1
+  name: ms-a
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - name: ms-a
+          env:
+            - name: MSB_HOST
+              value: "ms-b-service-v1.ms-b-ns"

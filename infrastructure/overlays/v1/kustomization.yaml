@@ -1,0 +1,36 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+bases:
+  - ../../application/ms-a
+  - ../../application/ms-b
+patchesStrategicMerge:
+  - ./labels.yaml
+  - ./env_vars.yaml
+  - ./service.yaml
+patchesJson6902:
+  - patch: |-
+      - op: replace
+        path: /metadata/name
+        value: ms-a-v1
+    target:
+      kind: Deployment
+      name: ms-a
+  - patch: |-
+      - op: replace
+        path: /metadata/name
+        value: ms-b-v1
+    target:
+      kind: Deployment
+      name: ms-b
+  - patch: |-
+      - op: replace
+        path: /metadata/name
+        value: ms-b-service-v1
+    target:
+      kind: Service
+      name: ms-b-service
+images:
+  - name: wassimkallel/ms-a-insat
+    newTag: "v1"
+  - name: wassimkallel/ms-b-insat
+    newTag: "v1"
