@@ -16,8 +16,8 @@ spec:
       route:
         - destination:
             host: ms-a-service
-            subset: green
+            subset: v2
     - route:
         - destination:
             host: ms-a-service
-            subset: blue
+            subset: v1
